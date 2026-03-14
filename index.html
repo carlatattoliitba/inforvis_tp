@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora de pasos y coordenadas</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #fafaf8;
+            color: #2c2c2c;
+        }
+
+        /* HERO */
+        .hero {
+            background-color: #1a1a2e;
+            color: #f0ede6;
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: normal;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: #b0aaa0;
+            max-width: 600px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .hero .meta {
+            font-size: 0.85rem;
+            color: #6c6880;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* INTRO */
+        .intro {
+            max-width: 720px;
+            margin: 60px auto;
+            padding: 0 24px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: center;
+        }
+
+        .intro em {
+            color: #1a1a2e;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* CHAPTER */
+        .chapter {
+            max-width: 960px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e0ddd6;
+            padding-bottom: 12px;
+        }
+
+        .chapter-number {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #999;
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: normal;
+            color: #1a1a2e;
+        }
+
+        .chapter-question {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .chapter-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 28px;
+            max-width: 700px;
+        }
+
+        /* VIZ CONTAINERS */
+        .viz-container {
+            width: 100%;
+            background: white;
+            border: 1px solid #e8e5de;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .viz-placeholder {
+            width: 100%;
+            min-height: 480px;
+            background: #f5f3ee;
+            border: 2px dashed #ccc9be;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            color: #888;
+            gap: 10px;
+        }
+
+        .viz-placeholder .tool-badge {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            background: #1a1a2e;
+            color: #f0ede6;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .viz-placeholder p {
+            font-size: 0.9rem;
+            color: #aaa;
+            max-width: 400px;
+            line-height: 1.5;
+        }
+
+        /* SVG embed */
+        object {
+            width: 100%;
+            height: 600px;
+            border: none;
+            display: block;
+        }
+
+        /* iframes */
+        iframe {
+            border: none;
+            width: 100%;
+            display: block;
+        }
+
+        /* DIVIDER */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: #1a1a2e;
+            margin: 0 auto 80px;
+            opacity: 0.15;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1a1a2e;
+            color: #6c6880;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        footer span {
+            color: #b0aaa0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .chapter-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <header class="hero">
+        <h1>Bitácora de pasos y coordenadas</h1>
+        <p class="subtitle">
+            Una exploración visual de 16 meses de datos personales registrados por el Apple Watch: movimiento, descanso, viajes y salud.
+        </p>
+        <p class="meta">NOV 2024 — MAR 2026 &nbsp;·&nbsp; DATOS PERSONALES &nbsp;·&nbsp; APPLE HEALTH</p>
+    </header>
+
+    <!-- INTRO -->
+    <section class="intro">
+        <p>
+            Durante los últimos 16 meses registré, sin darme cuenta, más de <em>1.7 millones</em> de métricas de salud.
+            Pasos, latidos, horas de sueño, rutas recorridas. Esta página es el intento de convertir esos datos
+            en una historia coherente sobre cómo me muevo, descanso y viajo.
+        </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CAP 1: PASOS -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">01</span>
+            <h2 class="chapter-title">El ritmo de los días</h2>
+        </div>
+        <p class="chapter-question">¿Cuánto me muevo cada día?</p>
+        <p class="chapter-text">
+            El punto de partida: los pasos diarios como pulso del movimiento cotidiano.
+            Cada celda es un día; el color refleja la intensidad. Se pueden ver claramente
+            las semanas más activas, los valles de descanso, y cómo cambia el ritmo mes a mes.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: exportar desde RAWGraphs e insertar SVG o imagen aquí -->
+            <object data="viz.svg" type="image/svg+xml">
+                Tu navegador no soporta visualización de SVG interactivos.
+            </object>
+        </div>
+    </section>
+
+    <!-- CAP 2: WORKOUTS POR TIPO -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">02</span>
+            <h2 class="chapter-title">¿Cómo me ejercito?</h2>
+        </div>
+        <p class="chapter-question">¿Qué tipo de actividad física hago y cuánto tiempo le dedico?</p>
+        <p class="chapter-text">
+            De 518 entrenamientos registrados, el caminar y el hiking dominan claramente.
+            La actividad es mayormente al aire libre. El gráfico muestra la distribución por tipo,
+            la duración promedio y las calorías quemadas.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: pegar embed de DataWrapper aquí -->
+            <div class="viz-placeholder">
+                <span class="tool-badge">DATAWRAPPER</span>
+                <p>Pegar aquí el embed de DataWrapper con los workouts por tipo (viz3_workouts_summary.csv)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAP 3: HEATMAP HORARIO -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">03</span>
+            <h2 class="chapter-title">La rutina invisible</h2>
+        </div>
+        <p class="chapter-question">¿Cuándo hago ejercicio? ¿Tengo una rutina?</p>
+        <p class="chapter-text">
+            El mapa de calor revela un patrón claro: lunes a miércoles entre las 19 y las 21hs
+            concentran la mayor actividad. Los sábados a las 10am aparece otro pico, probablemente
+            caminatas o hikings de fin de semana.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: pegar embed de Tableau Public o Power BI aquí -->
+            <div class="viz-placeholder">
+                <span class="tool-badge">TABLEAU / POWER BI</span>
+                <p>Pegar aquí el embed del heatmap hora × día de la semana (viz4_heatmap.csv)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAP 4: VIAJE -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">04</span>
+            <h2 class="chapter-title">En febrero, todo cambió</h2>
+        </div>
+        <p class="chapter-question">¿Dónde estuve y qué recorrí durante el viaje de febrero 2026?</p>
+        <p class="chapter-text">
+            En febrero el GPS registró algo diferente: Buenos Aires → Barcelona → París → Ámsterdam → Madrid.
+            Las trayectorias muestran los recorridos reales caminando por cada ciudad. La actividad física
+            no se interrumpió con el viaje — solo cambió de escenario.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: pegar embed de Flourish Map o Kepler.gl aquí -->
+            <div class="viz-placeholder">
+                <span class="tool-badge">FLOURISH / KEPLER.GL</span>
+                <p>Pegar aquí el mapa de rutas GPS del viaje (viz_travel_feb2026.csv), coloreado por ciudad</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAP 5: SUEÑO -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">05</span>
+            <h2 class="chapter-title">Cómo descanso</h2>
+        </div>
+        <p class="chapter-question">¿Cuánto y qué tan bien duermo cada noche?</p>
+        <p class="chapter-text">
+            457 noches registradas con sus fases: sueño Core, profundo (Deep) y REM.
+            El gráfico muestra la composición del sueño noche a noche y permite ver
+            si los días de más actividad física se correlacionan con mejor descanso.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: pegar embed de Flourish aquí -->
+            <div class="viz-placeholder">
+                <span class="tool-badge">FLOURISH</span>
+                <p>Pegar aquí el gráfico de barras apiladas de sueño por noche (viz6_sleep.csv)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAP 6: FITNESS (FC + VO2MAX) -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">06</span>
+            <h2 class="chapter-title">Lo que el corazón recuerda</h2>
+        </div>
+        <p class="chapter-question">¿Mejoró mi condición física a lo largo del tiempo?</p>
+        <p class="chapter-text">
+            La frecuencia cardíaca en reposo y el VO2Max son los indicadores más directos
+            del estado cardiovascular. Una FC en reposo más baja y un VO2Max más alto
+            indican mejor condición física. El gráfico muestra su evolución semana a semana.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: pegar embed de Flourish aquí -->
+            <div class="viz-placeholder">
+                <span class="tool-badge">FLOURISH</span>
+                <p>Pegar aquí el line chart de FC en reposo y VO2Max semanal (viz2_fitness_weekly.csv)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAP 7: HRV -->
+    <section class="chapter">
+        <div class="chapter-header">
+            <span class="chapter-number">07</span>
+            <h2 class="chapter-title">El estrés que no se ve</h2>
+        </div>
+        <p class="chapter-question">¿Cuándo me recuperé bien y cuándo estuve bajo estrés?</p>
+        <p class="chapter-text">
+            La variabilidad de la frecuencia cardíaca (HRV) es el dato menos conocido
+            pero más revelador: un HRV alto indica buena recuperación, un HRV bajo sugiere
+            estrés o fatiga. Con un promedio de 53.7 ms y picos de hasta 227 ms,
+            la serie semanal muestra los momentos de mayor y menor recuperación del período.
+        </p>
+        <div class="viz-container">
+            <!-- REEMPLAZAR: pegar embed de Flourish o DataWrapper aquí -->
+            <div class="viz-placeholder">
+                <span class="tool-badge">FLOURISH</span>
+                <p>Pegar aquí el line chart de HRV semanal (viz7_hrv_weekly.csv)</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><span>Bitácora de pasos y coordenadas</span></p>
+        <p style="margin-top:8px;">Trabajo Práctico · Visualización de Datos · ECD.2025.A · ITBA</p>
+        <p style="margin-top:8px;">Datos: Apple Health Export · Nov 2024 – Mar 2026</p>
+    </footer>
+
+</body>
+</html>
