@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácora de pasos y coordenadas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -12,20 +13,38 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background-color: #fafaf8;
-            color: #2c2c2c;
+            font-family: 'Caveat', cursive;
+            background-color: #ede8dc;
+            color: #2a2318;
+            font-size: 1.15rem;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.35;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            mix-blend-mode: multiply;
         }
 
         /* HERO */
         .hero {
-            background-color: #1a1a2e;
-            color: #f0ede6;
+            background-color: #f2ece0;
+            color: #2a2318;
             padding: 80px 20px 60px;
             text-align: center;
+            border-bottom: 2px solid #2a2318;
         }
 
         .hero h1 {
+            font-family: 'Special Elite', cursive;
             font-size: 2.8rem;
             font-weight: normal;
             letter-spacing: 0.02em;
@@ -33,17 +52,18 @@
         }
 
         .hero .subtitle {
-            font-size: 1.1rem;
-            color: #b0aaa0;
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: #5a4a38;
             max-width: 600px;
             margin: 0 auto 24px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .hero .meta {
-            font-size: 0.85rem;
-            color: #6c6880;
-            font-family: 'Courier New', monospace;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: #8a7a68;
             letter-spacing: 0.05em;
         }
 
@@ -52,16 +72,17 @@
             max-width: 720px;
             margin: 60px auto;
             padding: 0 24px;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #444;
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: #3a3028;
             text-align: center;
         }
 
         .intro em {
-            color: #1a1a2e;
+            color: #2a2318;
             font-style: normal;
-            font-weight: bold;
+            font-weight: 700;
+            border-bottom: 2px solid #2a2318;
         }
 
         /* CHAPTER */
@@ -76,36 +97,39 @@
             align-items: baseline;
             gap: 16px;
             margin-bottom: 12px;
-            border-bottom: 1px solid #e0ddd6;
+            border-bottom: 2px solid #2a2318;
             padding-bottom: 12px;
         }
 
         .chapter-number {
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            color: #999;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            color: #9a8a78;
             letter-spacing: 0.1em;
             flex-shrink: 0;
         }
 
         .chapter-title {
+            font-family: 'Special Elite', cursive;
             font-size: 1.5rem;
             font-weight: normal;
-            color: #1a1a2e;
+            color: #2a2318;
         }
 
         .chapter-question {
-            font-size: 1rem;
-            color: #666;
+            font-family: 'Caveat', cursive;
+            font-size: 1.25rem;
+            color: #5a4a38;
             margin-bottom: 20px;
             font-style: italic;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .chapter-text {
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.8;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: #3a3028;
+            line-height: 1.9;
             margin-bottom: 28px;
             max-width: 700px;
         }
@@ -113,43 +137,41 @@
         /* VIZ CONTAINERS */
         .viz-container {
             width: 100%;
-            background: white;
-            border: 1px solid #e8e5de;
-            border-radius: 4px;
+            background: #f2ece0;
+            border: 2px solid #2a2318;
             overflow: hidden;
         }
 
         .viz-placeholder {
             width: 100%;
             min-height: 480px;
-            background: #f5f3ee;
-            border: 2px dashed #ccc9be;
-            border-radius: 4px;
+            background: #f2ece0;
+            border: 2px dashed #9a8a78;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px;
             text-align: center;
-            color: #888;
-            gap: 10px;
+            color: #9a8a78;
+            gap: 12px;
         }
 
         .viz-placeholder .tool-badge {
-            font-family: 'Courier New', monospace;
-            font-size: 0.75rem;
-            background: #1a1a2e;
-            color: #f0ede6;
-            padding: 4px 10px;
-            border-radius: 20px;
-            letter-spacing: 0.05em;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            background: #2a2318;
+            color: #f5f0e8;
+            padding: 4px 14px;
+            letter-spacing: 0.1em;
         }
 
         .viz-placeholder p {
-            font-size: 0.9rem;
-            color: #aaa;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: #9a8a78;
             max-width: 400px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* SVG embed */
@@ -169,26 +191,28 @@
 
         /* DIVIDER */
         .divider {
-            width: 60px;
+            width: 80px;
             height: 2px;
-            background: #1a1a2e;
+            background: #2a2318;
             margin: 0 auto 80px;
-            opacity: 0.15;
+            opacity: 0.25;
         }
 
         /* FOOTER */
         footer {
-            background-color: #1a1a2e;
-            color: #6c6880;
+            background-color: #f2ece0;
+            color: #9a8a78;
             text-align: center;
             padding: 40px 20px;
-            font-size: 0.85rem;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 0.05em;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            border-top: 2px solid #2a2318;
+            letter-spacing: 0.03em;
         }
 
         footer span {
-            color: #b0aaa0;
+            font-family: 'Special Elite', cursive;
+            color: #2a2318;
         }
 
         /* RESPONSIVE */
