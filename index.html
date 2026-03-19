@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácora de pasos y coordenadas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         @font-face {
             font-family: 'ScratchPencil';
@@ -12,170 +11,200 @@
             font-weight: normal;
             font-style: normal;
         }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            background-color: #ede8dc;
-            color: #2a2318;
-            font-size: 1.15rem;
+            font-family: 'ScratchPencil', cursive;
+            background-color: #f7f7f5;
+            background-image:
+                linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+            color: #1a1a1a;
+            font-size: 1.1rem;
+        }
+
+        /* NAV DOTS */
+        .nav-dots {
+            position: fixed;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .nav-dot.active {
+            background: #1a1a1a;
+            transform: scale(1.4);
+        }
+
+        /* SECTIONS */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px 60px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
             position: relative;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.35;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            mix-blend-mode: multiply;
-        }
-
         /* HERO */
-        .hero {
-            background-color: #f2ece0;
-            color: #2a2318;
-            padding: 80px 20px 60px;
-            text-align: center;
-            border-bottom: 2px solid #2a2318;
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .hero h1 {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 2.8rem;
-            font-weight: normal;
-            letter-spacing: 0.02em;
+        .hero-tag {
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            color: #555;
+            margin-bottom: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 5.5rem;
+            font-weight: 900;
+            line-height: 1.05;
+            color: #1a1a1a;
+            white-space: nowrap;
+            margin-bottom: 40px;
+            background-color: #F5C518;
+            display: inline-block;
+            padding: 12px 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            color: #333;
+            max-width: 100%;
+            white-space: nowrap;
+            line-height: 1.7;
+            font-weight: bold;
             margin-bottom: 16px;
         }
 
-        .hero .subtitle {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1.3rem;
-            color: #5a4a38;
-            max-width: 600px;
-            margin: 0 auto 24px;
-            line-height: 1.7;
+        /* CHAPTER NUMBER FLAG */
+        .chapter-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .hero .meta {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1rem;
-            color: #8a7a68;
-            letter-spacing: 0.05em;
+        .chapter-flag .flag-box {
+            background: #1a1a1a;
+            color: #F5C518;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            padding: 4px 12px;
+            text-transform: uppercase;
         }
 
-        /* INTRO */
-        .intro {
-            max-width: 720px;
-            margin: 60px auto;
-            padding: 0 24px;
-            font-size: 1.3rem;
-            line-height: 1.9;
-            color: #3a3028;
-            text-align: center;
+        .chapter-flag .flag-line {
+            width: 40px;
+            height: 2px;
+            background: #1a1a1a;
         }
 
-        .intro em {
-            color: #2a2318;
-            font-style: normal;
-            font-weight: 700;
-            border-bottom: 2px solid #2a2318;
-        }
-
-        /* CHAPTER */
-        .chapter {
-            max-width: 960px;
-            margin: 0 auto 80px;
-            padding: 0 24px;
-        }
-
+        /* CHAPTER CONTENT */
         .chapter-header {
             display: flex;
-            align-items: baseline;
-            gap: 16px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #2a2318;
-            padding-bottom: 12px;
-        }
-
-        .chapter-number {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 0.9rem;
-            color: #9a8a78;
-            letter-spacing: 0.1em;
-            flex-shrink: 0;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .chapter-title {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1.5rem;
-            font-weight: normal;
-            color: #2a2318;
+            display: none;
         }
 
         .chapter-question {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1.25rem;
-            color: #5a4a38;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #1a1a1a;
             font-style: italic;
-            line-height: 1.7;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding-left: 16px;
+            border-left: 3px solid #F5C518;
+            line-height: 1.6;
         }
 
         .chapter-text {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1.2rem;
-            color: #3a3028;
-            line-height: 1.9;
-            margin-bottom: 28px;
-            max-width: 700px;
+            font-size: 1.4rem;
+            color: #333;
+            line-height: 1.8;
+            max-width: 640px;
+            margin-bottom: 36px;
         }
 
-        /* VIZ CONTAINERS */
+        /* VIZ */
         .viz-container {
             width: 100%;
-            background: #f2ece0;
-            border: 2px solid #2a2318;
+            background: white;
             overflow: hidden;
         }
 
         .viz-placeholder {
             width: 100%;
-            min-height: 480px;
-            background: #f2ece0;
-            border: 2px dashed #9a8a78;
+            min-height: 420px;
+            background: white;
+            border: 2px dashed #ccc;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px;
             text-align: center;
-            color: #9a8a78;
             gap: 12px;
         }
 
         .viz-placeholder .tool-badge {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
+            font-family: 'ScratchPencil', cursive;
             font-size: 0.85rem;
-            background: #2a2318;
-            color: #f5f0e8;
+            background: #1a1a1a;
+            color: #F5C518;
             padding: 4px 14px;
             letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .viz-placeholder p {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1.1rem;
-            color: #9a8a78;
+            font-family: 'ScratchPencil', cursive;
+            font-size: 1rem;
+            color: #aaa;
             max-width: 400px;
             line-height: 1.6;
         }
@@ -183,7 +212,7 @@
         /* SVG embed */
         object {
             width: 100%;
-            height: 600px;
+            height: 560px;
             border: none;
             display: block;
         }
@@ -195,172 +224,223 @@
             display: block;
         }
 
+        /* INTRO SECTION */
+        .intro-section {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 2rem;
+            line-height: 1.9;
+            color: #333;
+        }
+
+        .intro-text strong {
+            background-color: #F5C518;
+            padding: 0 4px;
+            font-weight: normal;
+        }
+
         /* DIVIDER */
         .divider {
-            width: 80px;
-            height: 2px;
-            background: #2a2318;
-            margin: 0 auto 80px;
-            opacity: 0.25;
+            width: 60px;
+            height: 3px;
+            background: #1a1a1a;
+            margin: 0 auto 60px;
         }
 
         /* FOOTER */
         footer {
-            background-color: #f2ece0;
-            color: #9a8a78;
+            background: #1a1a1a;
+            color: #888;
             text-align: center;
-            padding: 40px 20px;
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            font-size: 1.1rem;
-            border-top: 2px solid #2a2318;
-            letter-spacing: 0.03em;
+            padding: 48px 20px;
+            font-family: 'ScratchPencil', cursive;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
         }
 
         footer span {
-            font-family: 'ScratchPencil', 'Caveat', cursive;
-            color: #2a2318;
+            color: #F5C518;
+        }
+
+        /* FADE IN */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.8rem; }
-            .chapter-title { font-size: 1.2rem; }
+        @media (max-width: 700px) {
+            .hero-title { font-size: 2.5rem; }
+            .section, .hero-section { padding: 40px 24px; }
+            .chapter-title { font-size: 1.8rem; }
+            .nav-dots { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAV DOTS -->
+    <nav class="nav-dots" id="navDots">
+        <div class="nav-dot active" data-index="0" title="Inicio"></div>
+        <div class="nav-dot" data-index="1" title="Introducción"></div>
+        <div class="nav-dot" data-index="2" title="01 · Pasos"></div>
+        <div class="nav-dot" data-index="3" title="02 · Ejercicio"></div>
+        <div class="nav-dot" data-index="4" title="03 · Rutina"></div>
+        <div class="nav-dot" data-index="5" title="04 · Viaje"></div>
+        <div class="nav-dot" data-index="6" title="05 · Sueño"></div>
+        <div class="nav-dot" data-index="7" title="06 · Corazón"></div>
+        <div class="nav-dot" data-index="8" title="07 · HRV"></div>
+    </nav>
+
     <!-- HERO -->
-    <header class="hero">
-        <h1>Bitácora de pasos y coordenadas</h1>
-        <p class="subtitle">
-            Una exploración visual de 16 meses de datos personales registrados por el Apple Watch: movimiento, descanso, viajes y salud.
+    <div class="hero-section" data-section="0">
+        <p class="hero-tag">ECD.2025.A · ITBA · Visualización de Datos</p>
+        <h1 class="hero-title">
+            Bitácora de pasos y coordenadas
+        </h1>
+        <p class="hero-subtitle">
+            Una exploración visual de 16 meses de datos personales registrados por el Apple Watch
         </p>
-        <p class="meta">NOV 2024 — MAR 2026 &nbsp;·&nbsp; DATOS PERSONALES &nbsp;·&nbsp; APPLE HEALTH</p>
-    </header>
+    </div>
 
     <!-- INTRO -->
-    <section class="intro">
-        <p>
-            Durante los últimos 16 meses registré, sin darme cuenta, más de <em>1.7 millones</em> de métricas de salud.
+    <div class="intro-section fade-in" data-section="1">
+        <p class="intro-text">
+            Durante los últimos 16 meses registré, sin darme cuenta, más de <strong>1.7 millones</strong> de métricas de salud.
             Pasos, latidos, horas de sueño, rutas recorridas. Esta página es el intento de convertir esos datos
             en una historia coherente sobre cómo me muevo, descanso y viajo.
         </p>
-    </section>
+    </div>
 
     <div class="divider"></div>
 
-    <!-- CAP 1: PASOS -->
-    <section class="chapter">
+    <!-- CAP 1 -->
+    <div class="section fade-in" data-section="2">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.1</span>
+            <span class="flag-line"></span>
+        </div>
         <div class="chapter-header">
-            <span class="chapter-number">01</span>
             <h2 class="chapter-title">El ritmo de los días</h2>
+            <p class="chapter-question">¿Cuánto me muevo cada día?</p>
         </div>
-        <p class="chapter-question">¿Cuánto me muevo cada día?</p>
         <p class="chapter-text">
-            El punto de partida: los pasos diarios como pulso del movimiento cotidiano.
-            Cada celda es un día; el color refleja la intensidad. Se pueden ver claramente
-            las semanas más activas, los valles de descanso, y cómo cambia el ritmo mes a mes.
+            Los jueves y viernes concentran los días con más pasos en casi todos los meses. Febrero 2026 se destaca como el período de mayor actividad de todo el registro y los domingos son consistentemente los días de menor movimiento a lo largo de los 16 meses.
         </p>
         <div class="viz-container">
-            <!-- REEMPLAZAR: exportar desde RAWGraphs e insertar SVG o imagen aquí -->
-            <object data="viz.svg" type="image/svg+xml">
-                Tu navegador no soporta visualización de SVG interactivos.
-            </object>
+            <div class='tableauPlaceholder' id='viz1773880450694' style='position: relative'><noscript><a href='#'><img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;Pasos_17738802201560&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Pasos_17738802201560&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;Pasos_17738802201560&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div><script type='text/javascript'>var divElement = document.getElementById('viz1773880450694');var vizElement = divElement.getElementsByTagName('object')[0];vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';var scriptElement = document.createElement('script');scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
         </div>
-    </section>
+    </div>
 
-    <!-- CAP 2: WORKOUTS POR TIPO -->
-    <section class="chapter">
+    <!-- CAP 2 -->
+    <div class="section fade-in" data-section="3">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.2</span>
+            <span class="flag-line"></span>
+        </div>
         <div class="chapter-header">
-            <span class="chapter-number">02</span>
             <h2 class="chapter-title">¿Cómo me ejercito?</h2>
+            <p class="chapter-question">¿Qué tipo de actividad física hago y cuánto tiempo le dedico?</p>
         </div>
-        <p class="chapter-question">¿Qué tipo de actividad física hago y cuánto tiempo le dedico?</p>
         <p class="chapter-text">
-            De 518 entrenamientos registrados, el caminar y el hiking dominan claramente.
-            La actividad es mayormente al aire libre. El gráfico muestra la distribución por tipo,
-            la duración promedio y las calorías quemadas.
+            El hiking es la actividad que más calorías quema por sesión (423 kcal promedio) y también la de mayor duración (77 minutos). El running y el elliptical le siguen en intensidad calórica.
         </p>
         <div class="viz-container">
-            <!-- REEMPLAZAR: pegar embed de DataWrapper aquí -->
-            <div class="viz-placeholder">
-                <span class="tool-badge">DATAWRAPPER</span>
-                <p>Pegar aquí el embed de DataWrapper con los workouts por tipo (viz3_workouts_summary.csv)</p>
-            </div>
+            <iframe title="¿Qué y cuánto entreno?" aria-label="Grouped Bars" id="datawrapper-chart-3x7QC" src="https://datawrapper.dwcdn.net/3x7QC/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="1017" data-external="1"></iframe><script type="text/javascript">window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}});</script>
         </div>
-    </section>
+    </div>
 
-    <!-- CAP 3: HEATMAP HORARIO -->
-    <section class="chapter">
-        <div class="chapter-header">
-            <span class="chapter-number">03</span>
-            <h2 class="chapter-title">La rutina invisible</h2>
+    <!-- CAP 3 -->
+    <div class="section fade-in" data-section="4">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.3</span>
+            <span class="flag-line"></span>
         </div>
-        <p class="chapter-question">¿Cuándo hago ejercicio? ¿Tengo una rutina?</p>
+        <div class="chapter-header">
+            <h2 class="chapter-title">La rutina invisible</h2>
+            <p class="chapter-question">¿Cuándo hago ejercicio? ¿Tengo una rutina?</p>
+        </div>
         <p class="chapter-text">
             El mapa de calor revela un patrón claro: lunes a miércoles entre las 19 y las 21hs
             concentran la mayor actividad. Los sábados a las 10am aparece otro pico, probablemente
             caminatas o hikings de fin de semana.
         </p>
         <div class="viz-container">
-            <!-- REEMPLAZAR: pegar embed de Tableau Public o Power BI aquí -->
-            <div class="viz-placeholder">
-                <span class="tool-badge">TABLEAU / POWER BI</span>
-                <p>Pegar aquí el embed del heatmap hora × día de la semana (viz4_heatmap.csv)</p>
-            </div>
+            <div class='tableauPlaceholder' id='viz1773882785919' style='position: relative'><noscript><a href='#'><img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ho&#47;horas_17738827539570&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='horas_17738827539570&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ho&#47;horas_17738827539570&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div><script type='text/javascript'>var divElement = document.getElementById('viz1773882785919');var vizElement = divElement.getElementsByTagName('object')[0];vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';var scriptElement = document.createElement('script');scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
         </div>
-    </section>
+    </div>
 
-    <!-- CAP 4: VIAJE -->
-    <section class="chapter">
-        <div class="chapter-header">
-            <span class="chapter-number">04</span>
-            <h2 class="chapter-title">En febrero, todo cambió</h2>
+    <!-- CAP 4 -->
+    <div class="section fade-in" data-section="5">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.4</span>
+            <span class="flag-line"></span>
         </div>
-        <p class="chapter-question">¿Dónde estuve y qué recorrí durante el viaje de febrero 2026?</p>
+        <div class="chapter-header">
+            <h2 class="chapter-title">En febrero, todo cambió</h2>
+            <p class="chapter-question">¿Dónde estuve y qué recorrí durante el viaje de febrero 2026?</p>
+        </div>
         <p class="chapter-text">
             En febrero el GPS registró algo diferente: Buenos Aires → Barcelona → París → Ámsterdam → Madrid.
             Las trayectorias muestran los recorridos reales caminando por cada ciudad. La actividad física
             no se interrumpió con el viaje — solo cambió de escenario.
         </p>
         <div class="viz-container">
-            <!-- REEMPLAZAR: pegar embed de Flourish Map o Kepler.gl aquí -->
             <div class="viz-placeholder">
                 <span class="tool-badge">FLOURISH / KEPLER.GL</span>
                 <p>Pegar aquí el mapa de rutas GPS del viaje (viz_travel_feb2026.csv), coloreado por ciudad</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CAP 5: SUEÑO -->
-    <section class="chapter">
-        <div class="chapter-header">
-            <span class="chapter-number">05</span>
-            <h2 class="chapter-title">Cómo descanso</h2>
+    <!-- CAP 5 -->
+    <div class="section fade-in" data-section="6">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.5</span>
+            <span class="flag-line"></span>
         </div>
-        <p class="chapter-question">¿Cuánto y qué tan bien duermo cada noche?</p>
+        <div class="chapter-header">
+            <h2 class="chapter-title">Cómo descanso</h2>
+            <p class="chapter-question">¿Cuánto y qué tan bien duermo cada noche?</p>
+        </div>
         <p class="chapter-text">
             457 noches registradas con sus fases: sueño Core, profundo (Deep) y REM.
             El gráfico muestra la composición del sueño noche a noche y permite ver
             si los días de más actividad física se correlacionan con mejor descanso.
         </p>
         <div class="viz-container">
-            <!-- REEMPLAZAR: pegar embed de Flourish aquí -->
             <div class="viz-placeholder">
                 <span class="tool-badge">FLOURISH</span>
                 <p>Pegar aquí el gráfico de barras apiladas de sueño por noche (viz6_sleep.csv)</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CAP 6: FITNESS (FC + VO2MAX) -->
-    <section class="chapter">
-        <div class="chapter-header">
-            <span class="chapter-number">06</span>
-            <h2 class="chapter-title">Lo que el corazón recuerda</h2>
+    <!-- CAP 6 -->
+    <div class="section fade-in" data-section="7">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.6</span>
+            <span class="flag-line"></span>
         </div>
-        <p class="chapter-question">¿Mejoró mi condición física a lo largo del tiempo?</p>
+        <div class="chapter-header">
+            <h2 class="chapter-title">Lo que el corazón recuerda</h2>
+            <p class="chapter-question">¿Mejoró mi condición física a lo largo del tiempo?</p>
+        </div>
         <p class="chapter-text">
             La frecuencia cardíaca en reposo y el VO2Max son los indicadores más directos
             del estado cardiovascular. Una FC en reposo más baja y un VO2Max más alto
@@ -369,15 +449,18 @@
         <div class="viz-container">
             <div class="flourish-embed flourish-chart" data-src="visualisation/28056871"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/28056871/thumbnail" width="100%" alt="visualization" /></noscript></div>
         </div>
-    </section>
+    </div>
 
-    <!-- CAP 7: HRV -->
-    <section class="chapter">
-        <div class="chapter-header">
-            <span class="chapter-number">07</span>
-            <h2 class="chapter-title">El estrés que no se ve</h2>
+    <!-- CAP 7 -->
+    <div class="section fade-in" data-section="8">
+        <div class="chapter-flag">
+            <span class="flag-box">NO.7</span>
+            <span class="flag-line"></span>
         </div>
-        <p class="chapter-question">¿Cuándo me recuperé bien y cuándo estuve bajo estrés?</p>
+        <div class="chapter-header">
+            <h2 class="chapter-title">El estrés que no se ve</h2>
+            <p class="chapter-question">¿Cuándo me recuperé bien y cuándo estuve bajo estrés?</p>
+        </div>
         <p class="chapter-text">
             La variabilidad de la frecuencia cardíaca (HRV) es el dato menos conocido
             pero más revelador: un HRV alto indica buena recuperación, un HRV bajo sugiere
@@ -385,15 +468,12 @@
             la serie semanal muestra los momentos de mayor y menor recuperación del período.
         </p>
         <div class="viz-container">
-            <!-- REEMPLAZAR: pegar embed de Flourish o DataWrapper aquí -->
             <div class="viz-placeholder">
                 <span class="tool-badge">FLOURISH</span>
                 <p>Pegar aquí el line chart de HRV semanal (viz7_hrv_weekly.csv)</p>
             </div>
         </div>
-    </section>
-
-    <div class="divider"></div>
+    </div>
 
     <!-- FOOTER -->
     <footer>
@@ -401,6 +481,45 @@
         <p style="margin-top:8px;">Trabajo Práctico · Visualización de Datos · ECD.2025.A · ITBA</p>
         <p style="margin-top:8px;">Datos: Apple Health Export · Nov 2024 – Mar 2026</p>
     </footer>
+
+    <script>
+        // FADE IN
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // NAV DOTS
+        const sections = document.querySelectorAll('[data-section]');
+        const dots = document.querySelectorAll('.nav-dot');
+
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = entry.target.getAttribute('data-section');
+                    dots.forEach(d => d.classList.remove('active'));
+                    const activeDot = document.querySelector(`.nav-dot[data-index="${idx}"]`);
+                    if (activeDot) activeDot.classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(s => dotObserver.observe(s));
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = dot.getAttribute('data-index');
+                const target = document.querySelector(`[data-section="${idx}"]`);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 
 </body>
 </html>
